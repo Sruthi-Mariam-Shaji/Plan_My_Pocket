@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Plan_My_Pocket</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="topbar">
+
+    <div class="brand">
+        <div class="brand-icon">₹</div>
+
+        <div>
+            <h1>Plan_My_Pocket</h1>
+            <p>Track. Plan. Split.</p>
+        </div>
+    </div>
+
+    <nav>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#expenses">Expenses</a>
+    <a href="#groups">Groups</a>
+
+    <span id="userName"></span>
+
+    <button id="logoutBtn" class="logout-btn">
+        Logout
+    </button>
+</nav>
+
+</header>
+
+
+<main>
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <section id="dashboard">
+
+        <div class="welcome">
+
+            <div>
+                <span class="eyebrow">YOUR MONEY, SIMPLIFIED</span>
+
+                <h2>
+                    Take control of<br>
+                    <span>your pocket.</span>
+                </h2>
+
+                <p>
+                    Track your personal spending and
+                    settle group expenses without the headache.
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- SUMMARY CARDS -->
+
+        <div class="dashboard">
+
+            <div class="stat-card primary">
+
+                <div class="stat-top">
+                    <span>Total Spent</span>
+                    <span class="stat-icon">₹</span>
+                </div>
+
+                <div id="totalSpent">₹0</div>
+
+                <small>Across all expenses</small>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+                    <span>Personal</span>
+                    <span class="stat-icon">👤</span>
+                </div>
+
+                <div id="personalSpent">₹0</div>
+
+                <small>Your personal expenses</small>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+                    <span>Group</span>
+                    <span class="stat-icon">👥</span>
+                </div>
+
+                <div id="groupSpent">₹0</div>
+
+                <small>Shared expenses</small>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+                    <span>Groups</span>
+                    <span class="stat-icon">◉</span>
+                </div>
+
+                <div id="groupCount">0</div>
+
+                <small>Active groups</small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= EXPENSE SECTION ================= -->
+
+    <section id="expenses" class="content-grid">
+
+        <!-- ADD EXPENSE -->
+
+        <div class="panel">
+
+            <div class="panel-heading">
+
+                <div>
+                    <span class="section-label">TRACK</span>
+                    <h3>Add an Expense</h3>
+                </div>
+
+                <span class="heading-icon">＋</span>
+
+            </div>
+
+
+            <form id="expenseForm">
+
+                <label>Expense name</label>
+
+                <input
+                    type="text"
+                    id="description"
+                    placeholder="e.g. Lunch, Bus ticket..."
+                    required
+                >
+
+
+                <label>Amount</label>
+
+                <div class="amount-input">
+                    <span>₹</span>
+
+                    <input
+                        type="number"
+                        id="amount"
+                        placeholder="0"
+                        min="1"
+                        required
+                    >
+                </div>
+
+
+                <label>Category</label>
+
+                <select id="category">
+
+                    <option value="Food">🍔 Food</option>
+                    <option value="Travel">🚌 Travel</option>
+                    <option value="Shopping">🛍 Shopping</option>
+                    <option value="Entertainment">🎬 Entertainment</option>
+                    <option value="Other">📦 Other</option>
+
+                </select>
+
+
+                <label>Expense type</label>
+
+                <select id="type">
+
+                    <option value="personal">
+                        Personal Expense
+                    </option>
+
+                    <option value="group">
+                        Group Expense
+                    </option>
+
+                </select>
+
+
+                <button class="primary-button" type="submit">
+                    Add Expense
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- CATEGORY SUMMARY -->
+
+        <div class="panel">
+
+            <div class="panel-heading">
+
+                <div>
+                    <span class="section-label">OVERVIEW</span>
+                    <h3>Spending by Category</h3>
+                </div>
+
+                <span class="heading-icon">◒</span>
+
+            </div>
+
+
+            <div id="categorySummary">
+
+                <p class="empty">
+                    Add expenses to see your spending breakdown.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= RECENT EXPENSES ================= -->
+
+    <section class="panel full-panel">
+
+        <div class="panel-heading">
+
+            <div>
+                <span class="section-label">HISTORY</span>
+                <h3>Recent Expenses</h3>
+            </div>
+
+            <span class="heading-icon">↗</span>
+
+        </div>
+
+
+        <div id="expenseList">
+
+            <p class="empty">
+                No expenses added yet.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= GROUPS ================= -->
+
+    <section id="groups">
+
+        <div class="section-header">
+
+            <div>
+                <span class="section-label">GROUPS</span>
+
+                <h2>
+                    Your Groups
+                </h2>
+
+                <p>
+                    Split expenses and settle up with friends.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="content-grid">
+
+            <!-- CREATE GROUP -->
+
+            <div class="panel">
+
+                <div class="panel-heading">
+
+                    <div>
+                        <span class="section-label">NEW GROUP</span>
+                        <h3>Create a Group</h3>
+                    </div>
+
+                    <span class="heading-icon">👥</span>
+
+                </div>
+
+
+                <form id="groupForm">
+
+                    <label>Group name</label>
+
+                    <input
+                        type="text"
+                        id="groupName"
+                        placeholder="e.g. Kochi Trip"
+                        required
+                    >
+
+
+                    <label>Members</label>
+
+                    <input
+                        type="text"
+                        id="members"
+                        placeholder="Sruthi, Anu, Rahul"
+                        required
+                    >
+
+
+                    <small class="input-help">
+                        Separate names with commas.
+                    </small>
+
+
+                    <button class="primary-button" type="submit">
+                        Create Group
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- GROUP LIST -->
+
+            <div class="panel">
+
+                <div class="panel-heading">
+
+                    <div>
+                        <span class="section-label">YOUR GROUPS</span>
+                        <h3>Active Groups</h3>
+                    </div>
+
+                </div>
+
+
+                <div id="groupList">
+
+                    <p class="empty">
+                        No groups created yet.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= SPLITTER ================= -->
+
+    <section
+        class="panel splitter-panel"
+        id="splitterPanel"
+        style="display:none;"
+    >
+
+        <div class="splitter-header">
+
+            <div>
+
+                <span class="section-label">
+                    GROUP SPLITTER
+                </span>
+
+                <h2 id="selectedGroupName">
+                    Group Splitter
+                </h2>
+
+                <p>
+                    Add a shared expense and choose
+                    who paid and who participated.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="content-grid">
+
+            <!-- ADD SHARED EXPENSE -->
+
+            <div>
+
+                <form id="groupExpenseForm">
+
+                    <label>Expense name</label>
+
+                    <input
+                        type="text"
+                        id="groupExpenseName"
+                        placeholder="e.g. Dinner"
+                        required
+                    >
+
+
+                    <label>Amount</label>
+
+                    <div class="amount-input">
+
+                        <span>₹</span>
+
+                        <input
+                            type="number"
+                            id="groupExpenseAmount"
+                            placeholder="0"
+                            min="1"
+                            required
+                        >
+
+                    </div>
+
+
+                    <label>Paid by</label>
+
+                    <select id="paidBy"></select>
+
+
+                    <label>Split between</label>
+
+                    <div
+                        id="participantList"
+                        class="participant-list">
+                    </div>
+
+
+                    <button
+                        class="primary-button"
+                        type="submit"
+                    >
+                        Add Shared Expense
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- SETTLEMENT -->
+
+            <div
+                id="settlement"
+                class="settlement">
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<footer>
+
+    <strong>Plan_My_Pocket</strong>
+
+    <span>
+        Track. Plan. Split.
+    </span>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

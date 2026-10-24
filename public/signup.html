@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sign Up | Plan_My_Pocket</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="auth-page">
+
+        <div class="auth-card">
+
+            <div class="auth-logo">
+                💰
+            </div>
+
+            <h1>Plan_My_Pocket</h1>
+
+            <p class="auth-subtitle">
+                Start managing your expenses smarter.
+            </p>
+
+            <h2>Create Account 🚀</h2>
+
+            <form id="signupForm">
+
+                <div class="form-group">
+
+                    <label>Name</label>
+
+                    <input
+                        type="text"
+                        id="signupName"
+                        placeholder="Enter your name"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Email</label>
+
+                    <input
+                        type="email"
+                        id="signupEmail"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Password</label>
+
+                    <input
+                        type="password"
+                        id="signupPassword"
+                        placeholder="Minimum 6 characters"
+                        required
+                    >
+
+                </div>
+
+                <button type="submit" class="primary-btn">
+                    Create Account
+                </button>
+
+            </form>
+
+            <p id="signupMessage" class="auth-message"></p>
+
+            <p class="auth-switch">
+
+                Already have an account?
+
+                <a href="login.html">
+                    Login
+                </a>
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        const signupForm =
+            document.getElementById("signupForm");
+
+        signupForm.addEventListener("submit", async (e) => {
+
+            e.preventDefault();
+
+            const name =
+                document.getElementById("signupName").value;
+
+            const email =
+                document.getElementById("signupEmail").value;
+
+            const password =
+                document.getElementById("signupPassword").value;
+
+            const message =
+                document.getElementById("signupMessage");
+
+            try {
+
+                const response = await fetch(
+                    "/api/auth/signup",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            name,
+                            email,
+                            password
+                        })
+                    }
+                );
+
+                const data = await response.json();
+
+                if (!response.ok) {
+
+                    message.textContent =
+                        data.message;
+
+                    message.className =
+                        "auth-message error";
+
+                    return;
+                }
+
+                localStorage.setItem(
+                    "planMyPocketToken",
+                    data.token
+                );
+
+                localStorage.setItem(
+                    "planMyPocketUser",
+                    JSON.stringify(data.user)
+                );
+
+                window.location.href = "index.html";
+
+            } catch (error) {
+
+                message.textContent =
+                    "Unable to connect to server.";
+
+                message.className =
+                    "auth-message error";
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
